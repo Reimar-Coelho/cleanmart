@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="cadastroprodutostyle.css"">
+    <title>Cadastro Produto</title>
+</head>
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <div class="texto">
+                    <h2 id="voltar" onclick="index()"><i class="ri-arrow-left-s-line"></i></h2>
+                    <h2 id="log">Cadastro Produto</h2>
+                </div>
+                
+                <form action="/cadastroprodutolimpeza" method="post">
+                    <div  style="display: flex;">
+                        <div>
+                            <div class="inputbox">
+                                <input name="id_produtolimpeza" type="text" required>
+                                <label for="">Id do produto</label>
+                            </div>
+                            <div class="inputbox">
+                                <input name="descricao" type="text" required>
+                                <label for="">Descrição</label>
+                            </div>
+                            <div class="inputbox">
+                                <input name="fornecedor" type="text" required>
+                                <label for="">Fornecedor</label>
+                            </div>
+                            <div class="inputbox">
+                                <input name="dataFabricacao" type="date">
+                                <label for="">Data de fabricacao</label>
+                            </div>
+                            <div class="inputbox">
+                                <input name="quantidadeEstoque" type="number" required>
+                                <label for="">Quantidade de estoque</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="loginButton" type="submit">Registrar</button>
+                </form>
+                
+            </div>
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+</body>
+</html>

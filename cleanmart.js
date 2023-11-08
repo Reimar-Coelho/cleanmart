@@ -94,6 +94,10 @@ app.get("/", async (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
+app.get("/loginusuario", async (req, res) => {
+  res.sendFile(__dirname + "/login.html");
+});
+
 app.get("/cadastrousuario", async (req, res) => {
     res.sendFile(__dirname + "/cadastrousuario.html");
 });

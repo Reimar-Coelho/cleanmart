@@ -1,0 +1,439 @@
+@import url("https://fonts.cdnfonts.com/css/oruguitas");
+:root {
+  --translateX: 2em;
+  --translateY: 1em;
+  --rotate: 6deg;
+}
+
+@supports selector(:has([name="slider"]:checked)) {
+  :root {
+    --translateX: 80%;
+    --translateY: 20%;
+    --rotate: 12deg;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Oruguitas", sans-serif;
+}
+
+html {
+  font-size: clamp(7px, 1vw, 10px);
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  background: #18181B
+}
+
+[name=slider] {
+  position: fixed;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  opacity: 0;
+}
+
+.slider-item {
+  position: absolute;
+  transform: translateX(calc(var(--index) * var(--translateX) * -1)) translateY(calc(var(--index) * var(--translateY) * -1)) rotate(calc(var(--index) * var(--rotate) * -1));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30rem;
+  height: 40rem;
+  padding: 2rem;
+  isolation: isolate;
+  color: rgb(15, 20, 20);
+  background-color: #000000;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 50px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0.95;
+  transition: all 0.8s cubic-bezier(0, 0.02, 0, 1);
+  transform-origin: center bottom;
+  outline: 1px solid transparent;
+}
+.slider-item::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7));
+}
+.slider-item__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  z-index: -1;
+}
+.slider-item__number {
+  font-size: 7rem;
+  font-weight: 400;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+.slider-item__text {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+#slider--1:checked ~ [for=slider--1] {
+  opacity: 1;
+  z-index: 11;
+  transform: translateX(0) translateY(0) rotate(0);
+  outline: 1px solid #ffffff;
+}
+#slider--1:checked ~ [for=slider--1]::after {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider--0] {
+    transform: translateX(calc(-1 * var(--translateX))) translateY(calc(-1 * var(--translateY))) rotate(calc(-1 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--2] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(1 * var(--translateX))) translateY(calc(1 * var(--translateY))) rotate(calc(1 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---1] {
+    transform: translateX(calc(-2 * var(--translateX))) translateY(calc(-2 * var(--translateY))) rotate(calc(-2 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--3] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(2 * var(--translateX))) translateY(calc(2 * var(--translateY))) rotate(calc(2 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---2] {
+    transform: translateX(calc(-3 * var(--translateX))) translateY(calc(-3 * var(--translateY))) rotate(calc(-3 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--4] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(3 * var(--translateX))) translateY(calc(3 * var(--translateY))) rotate(calc(3 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---3] {
+    transform: translateX(calc(-4 * var(--translateX))) translateY(calc(-4 * var(--translateY))) rotate(calc(-4 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--5] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(4 * var(--translateX))) translateY(calc(4 * var(--translateY))) rotate(calc(4 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---4] {
+    transform: translateX(calc(-5 * var(--translateX))) translateY(calc(-5 * var(--translateY))) rotate(calc(-5 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--6] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(5 * var(--translateX))) translateY(calc(5 * var(--translateY))) rotate(calc(5 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---5] {
+    transform: translateX(calc(-6 * var(--translateX))) translateY(calc(-6 * var(--translateY))) rotate(calc(-6 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--7] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(6 * var(--translateX))) translateY(calc(6 * var(--translateY))) rotate(calc(6 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---6] {
+    transform: translateX(calc(-7 * var(--translateX))) translateY(calc(-7 * var(--translateY))) rotate(calc(-7 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--8] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(7 * var(--translateX))) translateY(calc(7 * var(--translateY))) rotate(calc(7 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---7] {
+    transform: translateX(calc(-8 * var(--translateX))) translateY(calc(-8 * var(--translateY))) rotate(calc(-8 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--9] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(8 * var(--translateX))) translateY(calc(8 * var(--translateY))) rotate(calc(8 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---8] {
+    transform: translateX(calc(-9 * var(--translateX))) translateY(calc(-9 * var(--translateY))) rotate(calc(-9 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--10] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(9 * var(--translateX))) translateY(calc(9 * var(--translateY))) rotate(calc(9 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--1:checked)) {
+  body:has(#slider--1:checked) .slider-item[for=slider---9] {
+    transform: translateX(calc(-10 * var(--translateX))) translateY(calc(-10 * var(--translateY))) rotate(calc(-10 * var(--rotate)));
+  }
+}
+#slider--1:checked ~ .slider-item[for=slider--11] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(10 * var(--translateX))) translateY(calc(10 * var(--translateY))) rotate(calc(10 * var(--rotate)));
+}
+
+#slider--2:checked ~ [for=slider--2] {
+  opacity: 1;
+  z-index: 11;
+  transform: translateX(0) translateY(0) rotate(0);
+  outline: 1px solid #ffffff;
+}
+#slider--2:checked ~ [for=slider--2]::after {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider--1] {
+    transform: translateX(calc(-1 * var(--translateX))) translateY(calc(-1 * var(--translateY))) rotate(calc(-1 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--3] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(1 * var(--translateX))) translateY(calc(1 * var(--translateY))) rotate(calc(1 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider--0] {
+    transform: translateX(calc(-2 * var(--translateX))) translateY(calc(-2 * var(--translateY))) rotate(calc(-2 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--4] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(2 * var(--translateX))) translateY(calc(2 * var(--translateY))) rotate(calc(2 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider---1] {
+    transform: translateX(calc(-3 * var(--translateX))) translateY(calc(-3 * var(--translateY))) rotate(calc(-3 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--5] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(3 * var(--translateX))) translateY(calc(3 * var(--translateY))) rotate(calc(3 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider---2] {
+    transform: translateX(calc(-4 * var(--translateX))) translateY(calc(-4 * var(--translateY))) rotate(calc(-4 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--6] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(4 * var(--translateX))) translateY(calc(4 * var(--translateY))) rotate(calc(4 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider---3] {
+    transform: translateX(calc(-5 * var(--translateX))) translateY(calc(-5 * var(--translateY))) rotate(calc(-5 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--7] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(5 * var(--translateX))) translateY(calc(5 * var(--translateY))) rotate(calc(5 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider---4] {
+    transform: translateX(calc(-6 * var(--translateX))) translateY(calc(-6 * var(--translateY))) rotate(calc(-6 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--8] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(6 * var(--translateX))) translateY(calc(6 * var(--translateY))) rotate(calc(6 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider---5] {
+    transform: translateX(calc(-7 * var(--translateX))) translateY(calc(-7 * var(--translateY))) rotate(calc(-7 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--9] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(7 * var(--translateX))) translateY(calc(7 * var(--translateY))) rotate(calc(7 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider---6] {
+    transform: translateX(calc(-8 * var(--translateX))) translateY(calc(-8 * var(--translateY))) rotate(calc(-8 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--10] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(8 * var(--translateX))) translateY(calc(8 * var(--translateY))) rotate(calc(8 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider---7] {
+    transform: translateX(calc(-9 * var(--translateX))) translateY(calc(-9 * var(--translateY))) rotate(calc(-9 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--11] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(9 * var(--translateX))) translateY(calc(9 * var(--translateY))) rotate(calc(9 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--2:checked)) {
+  body:has(#slider--2:checked) .slider-item[for=slider---8] {
+    transform: translateX(calc(-10 * var(--translateX))) translateY(calc(-10 * var(--translateY))) rotate(calc(-10 * var(--rotate)));
+  }
+}
+#slider--2:checked ~ .slider-item[for=slider--12] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(10 * var(--translateX))) translateY(calc(10 * var(--translateY))) rotate(calc(10 * var(--rotate)));
+}
+
+#slider--3:checked ~ [for=slider--3] {
+  opacity: 1;
+  z-index: 11;
+  transform: translateX(0) translateY(0) rotate(0);
+  outline: 1px solid #ffffff;
+}
+#slider--3:checked ~ [for=slider--3]::after {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider--2] {
+    transform: translateX(calc(-1 * var(--translateX))) translateY(calc(-1 * var(--translateY))) rotate(calc(-1 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--4] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(1 * var(--translateX))) translateY(calc(1 * var(--translateY))) rotate(calc(1 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider--1] {
+    transform: translateX(calc(-2 * var(--translateX))) translateY(calc(-2 * var(--translateY))) rotate(calc(-2 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--5] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(2 * var(--translateX))) translateY(calc(2 * var(--translateY))) rotate(calc(2 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider--0] {
+    transform: translateX(calc(-3 * var(--translateX))) translateY(calc(-3 * var(--translateY))) rotate(calc(-3 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--6] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(3 * var(--translateX))) translateY(calc(3 * var(--translateY))) rotate(calc(3 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider---1] {
+    transform: translateX(calc(-4 * var(--translateX))) translateY(calc(-4 * var(--translateY))) rotate(calc(-4 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--7] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(4 * var(--translateX))) translateY(calc(4 * var(--translateY))) rotate(calc(4 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider---2] {
+    transform: translateX(calc(-5 * var(--translateX))) translateY(calc(-5 * var(--translateY))) rotate(calc(-5 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--8] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(5 * var(--translateX))) translateY(calc(5 * var(--translateY))) rotate(calc(5 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider---3] {
+    transform: translateX(calc(-6 * var(--translateX))) translateY(calc(-6 * var(--translateY))) rotate(calc(-6 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--9] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(6 * var(--translateX))) translateY(calc(6 * var(--translateY))) rotate(calc(6 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider---4] {
+    transform: translateX(calc(-7 * var(--translateX))) translateY(calc(-7 * var(--translateY))) rotate(calc(-7 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--10] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(7 * var(--translateX))) translateY(calc(7 * var(--translateY))) rotate(calc(7 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider---5] {
+    transform: translateX(calc(-8 * var(--translateX))) translateY(calc(-8 * var(--translateY))) rotate(calc(-8 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--11] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(8 * var(--translateX))) translateY(calc(8 * var(--translateY))) rotate(calc(8 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider---6] {
+    transform: translateX(calc(-9 * var(--translateX))) translateY(calc(-9 * var(--translateY))) rotate(calc(-9 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--12] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(9 * var(--translateX))) translateY(calc(9 * var(--translateY))) rotate(calc(9 * var(--rotate)));
+}
+
+@supports selector(:has(#slider--3:checked)) {
+  body:has(#slider--3:checked) .slider-item[for=slider---7] {
+    transform: translateX(calc(-10 * var(--translateX))) translateY(calc(-10 * var(--translateY))) rotate(calc(-10 * var(--rotate)));
+  }
+}
+#slider--3:checked ~ .slider-item[for=slider--13] {
+  z-index: calc(10 - var(--index));
+  transform: translateX(calc(10 * var(--translateX))) translateY(calc(10 * var(--translateY))) rotate(calc(10 * var(--rotate)));
+}
+

@@ -1,0 +1,159 @@
+$totalSlide: 3;
+
+:root{
+    --translateX: 2em;
+    --translateY: 1em;
+    --rotate: 6deg;
+}
+
+@supports selector(:has([name="slider"]:checked)){
+    :root{
+        --translateX: 80%;
+        --translateY: 20%;
+        --rotate: 12deg;
+    }
+}
+
+@import url('https://fonts.cdnfonts.com/css/oruguitas');
+// @import url('//db.onlinewebfonts.com/c/8afe455ba1f531b757c3be1d8942f652?family=Orelo+SemiWide+Medium');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Oruguitas', sans-serif;
+    // font-family: "Orelo SemiWide Medium", serif;
+}
+
+html{
+    font-size: clamp(7px, 1vw, 10px);
+}
+
+html,
+body{
+    height: 100%;
+    overflow: hidden;
+}
+
+body{
+    position: relative;
+    display: grid;
+    place-items: center;
+    font-size: 1.6rem;
+    background: linear-gradient(135deg, black, #220033);
+}
+
+[name="slider"]{
+    position: fixed;
+    pointer-events: none;
+    user-select: none;
+    appearance: none;
+    opacity: 0;
+}
+
+.slider-item{
+    position: absolute;
+    transform:
+        translateX(calc(var(--index) * (var(--translateX) * -1)))
+        translateY(calc(var(--index) * (var(--translateY) * -1)))
+        rotate(calc(var(--index) * (var(--rotate) * -1)));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30rem;
+    height: 40rem;
+    padding: 2rem;
+    isolation: isolate;
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 50px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0.95;
+    transition: all 0.8s cubic-bezier(0, 0.02, 0, 1);
+    transform-origin: center bottom;
+    outline: 1px solid transparent;
+
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0) 30%,
+                rgba(0, 0, 0, 0) 50%,
+                rgba(0, 0, 0, 0.7)
+            );
+    }
+
+    &__image{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        pointer-events: none;
+        user-select: none;
+        z-index: -1;
+    }
+
+    &__number{
+        font-size: 7rem;
+        font-weight: 400;
+        text-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    &__text{
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+}
+
+@for $outside from 1 through $totalSlide {
+    #slider--#{$outside}:checked ~ [for="slider--#{$outside}"]{
+        opacity: 1;
+        z-index: $totalSlide + 1;
+        transform: translateX(0) translateY(0) rotate(0);
+        outline: 1px solid #ffffff;
+
+        &::after {
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.3),
+                    rgba(0, 0, 0, 0) 30%,
+                    rgba(0, 0, 0, 0) 50%,
+                    rgba(0, 0, 0, 0.5)
+                );
+        }
+    }
+
+    @for $inside from 1 through $totalSlide{
+        @supports selector(:has(#slider--#{$outside}:checked)){
+            body:has(#slider--#{$outside}:checked) .slider-item[for="slider--#{$outside - $inside}"]{
+                transform:
+                    translateX(calc(#{-$inside} * var(--translateX)))
+                    translateY(calc(#{-$inside} * var(--translateY)))
+                    rotate(calc(#{-$inside} * var(--rotate)));
+            }
+        }
+
+        #slider--#{$outside}:checked ~ .slider-item[for="slider--#{$outside + $inside}"]{
+            z-index: calc($totalSlide - var(--index));
+            transform:
+                translateX(calc(#{$inside} * var(--translateX)))
+                translateY(calc(#{$inside} * var(--translateY)))
+                rotate(calc(#{$inside} * var(--rotate)));
+        }
+    }
+}
